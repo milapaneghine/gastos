@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meu Plano Financeiro 🌸</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,600;1,300;1,600&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fdf6f0;
+    --bg2: #fef9f5;
+    --surface: #ffffff;
+    --surface2: #fdf0f5;
+    --border: #f0dde8;
+    --border2: #ead5e4;
+
+    --rose: #f2a7c3;
+    --rose-light: #fde8f2;
+    --rose-text: #c4607e;
+
+    --peach: #f9c4a0;
+    --peach-light: #fff0e6;
+    --peach-text: #c47040;
+
+    --mint: #a8dbc5;
+    --mint-light: #e6f7f0;
+    --mint-text: #3a8a68;
+
+    --lavender: #c4b5e8;
+    --lavender-light: #f0ecfb;
+    --lavender-text: #6b50b8;
+
+    --sky: #a8d4f0;
+    --sky-light: #e6f4fd;
+    --sky-text: #3a78aa;
+
+    --butter: #f5e0a0;
+    --butter-light: #fffbec;
+    --butter-text: #8a6a10;
+
+    --text: #3a2e38;
+    --text2: #6e5c6a;
+    --muted: #a08898;
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Nunito', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-image:
+      radial-gradient(circle at 10% 20%, #fde8f230 0%, transparent 50%),
+      radial-gradient(circle at 90% 80%, #e6f4fd30 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, #f0ecfb20 0%, transparent 60%);
+  }
+
+  /* floating blobs */
+  .blob {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.18;
+    pointer-events: none;
+    z-index: 0;
+    animation: float 8s ease-in-out infinite;
+  }
+  .blob1 { width: 300px; height: 300px; background: var(--rose); top: -80px; left: -80px; animation-delay: 0s; }
+  .blob2 { width: 250px; height: 250px; background: var(--mint); bottom: -60px; right: -60px; animation-delay: 3s; }
+  .blob3 { width: 200px; height: 200px; background: var(--lavender); top: 40%; left: 60%; animation-delay: 6s; }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-20px) scale(1.05); }
+  }
+
+  header {
+    position: relative;
+    z-index: 10;
+    padding: 48px 40px 36px;
+    border-bottom: 2px dashed var(--border2);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    flex-wrap: wrap;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(12px);
+  }
+  .header-left h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--text);
+  }
+  .header-left h1 em { color: var(--rose-text); font-style: italic; }
+  .header-left p { color: var(--muted); font-size: 0.82rem; margin-top: 6px; }
+  .badge {
+    background: var(--rose-light);
+    color: var(--rose-text);
+    border: 2px solid var(--rose);
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  nav {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    gap: 6px;
+    padding: 16px 40px;
+    border-bottom: 2px dashed var(--border2);
+    overflow-x: auto;
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(8px);
+    flex-wrap: wrap;
+  }
+  nav button {
+    background: var(--surface);
+    border: 2px solid var(--border2);
+    color: var(--muted);
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 8px 18px;
+    border-radius: 999px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.25s;
+  }
+  nav button:hover { border-color: var(--rose); color: var(--rose-text); background: var(--rose-light); }
+  nav button.active { background: var(--rose-light); border-color: var(--rose); color: var(--rose-text); }
+
+  main { padding: 36px 40px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 10; }
+
+  .tab-content { display: none; animation: fadeUp 0.35s ease; }
+  .tab-content.active { display: block; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  .grid { display: grid; gap: 16px; }
+  .grid-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .grid-3 { grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+  .grid-4 { grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
+
+  .card {
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: 20px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 12px rgba(180,120,150,0.06);
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(180,120,150,0.12); }
+
+  .card.c-rose { background: var(--rose-light); border-color: var(--rose); }
+  .card.c-peach { background: var(--peach-light); border-color: var(--peach); }
+  .card.c-mint { background: var(--mint-light); border-color: var(--mint); }
+  .card.c-lavender { background: var(--lavender-light); border-color: var(--lavender); }
+  .card.c-sky { background: var(--sky-light); border-color: var(--sky); }
+  .card.c-butter { background: var(--butter-light); border-color: var(--butter); }
+
+  .card-emoji { font-size: 1.6rem; margin-bottom: 10px; display: block; }
+  .card-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .card-value { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 600; line-height: 1; color: var(--text); }
+  .card-value.v-rose { color: var(--rose-text); }
+  .card-value.v-peach { color: var(--peach-text); }
+  .card-value.v-mint { color: var(--mint-text); }
+  .card-value.v-lavender { color: var(--lavender-text); }
+  .card-sub { font-size: 0.75rem; color: var(--muted); margin-top: 6px; }
+
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    font-style: italic;
+    color: var(--text2);
+    margin-bottom: 14px;
+    margin-top: 32px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: repeating-linear-gradient(90deg, var(--border2) 0, var(--border2) 6px, transparent 6px, transparent 12px);
+  }
+
+  /* ALERT */
+  .alert {
+    padding: 16px 20px;
+    border-radius: 16px;
+    font-size: 0.82rem;
+    line-height: 1.7;
+    margin-bottom: 18px;
+    border: 2px solid;
+  }
+  .alert.warn { background: var(--butter-light); border-color: var(--butter); color: var(--butter-text); }
+  .alert.info { background: var(--mint-light); border-color: var(--mint); color: var(--mint-text); }
+  .alert.danger { background: var(--rose-light); border-color: var(--rose); color: var(--rose-text); }
+  .alert.lavender { background: var(--lavender-light); border-color: var(--lavender); color: var(--lavender-text); }
+
+  /* HIGHLIGHT */
+  .highlight-box {
+    background: linear-gradient(135deg, var(--mint-light), var(--sky-light));
+    border: 2px solid var(--mint);
+    border-radius: 20px;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+  }
+  .highlight-box .label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mint-text); margin-bottom: 6px; }
+  .highlight-box .value { font-family: 'Fraunces', serif; font-size: 2.2rem; font-weight: 600; color: var(--mint-text); }
+  .highlight-box .sub { font-size: 0.8rem; color: var(--text2); margin-top: 8px; line-height: 1.6; }
+
+  /* BUDGET ROWS */
+  .budget-row { display: flex; align-items: center; gap: 12px; padding: 11px 0; border-bottom: 1px dashed var(--border2); }
+  .budget-row:last-child { border-bottom: none; }
+  .budget-cat { flex: 1; font-size: 0.82rem; color: var(--text2); }
+  .budget-amount { font-size: 0.88rem; font-family: 'Nunito', monospace; font-weight: 700; min-width: 110px; text-align: right; }
+
+  /* TABLE */
+  .table-wrap { overflow-x: auto; border-radius: 16px; border: 2px solid var(--border2); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  th { text-align: left; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 14px 16px; background: var(--surface2); }
+  td { padding: 13px 16px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #fdf5f8; }
+
+  .tag { display: inline-block; padding: 3px 10px; font-size: 0.66rem; font-weight: 700; border-radius: 999px; letter-spacing: 0.04em; }
+  .tag.fixed { background: var(--sky-light); color: var(--sky-text); border: 1px solid var(--sky); }
+  .tag.debt { background: var(--rose-light); color: var(--rose-text); border: 1px solid var(--rose); }
+  .tag.flex { background: var(--mint-light); color: var(--mint-text); border: 1px solid var(--mint); }
+  .tag.saving { background: var(--butter-light); color: var(--butter-text); border: 1px solid var(--butter); }
+  .tag.critical { background: var(--peach-light); color: var(--peach-text); border: 1px solid var(--peach); }
+
+  /* PROGRESS */
+  .progress-bar { height: 8px; background: var(--border); border-radius: 999px; overflow: hidden; margin-top: 10px; }
+  .progress-fill { height: 100%; border-radius: 999px; transition: width 1.2s cubic-bezier(.4,0,.2,1); }
+  .progress-label { display: flex; justify-content: space-between; font-size: 0.68rem; color: var(--muted); margin-top: 4px; }
+
+  /* DEBT ITEMS */
+  .debt-item {
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: 18px;
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(180,120,150,0.05);
+  }
+  .debt-item:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(180,120,150,0.1); }
+  .debt-name { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 600; color: var(--text); }
+  .debt-detail { font-size: 0.73rem; color: var(--muted); margin-top: 4px; line-height: 1.5; }
+  .debt-total { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 600; }
+  .debt-parcel { font-size: 0.72rem; color: var(--muted); margin-top: 2px; text-align: right; }
+
+  /* TIMELINE */
+  .timeline { position: relative; padding-left: 36px; }
+  .timeline::before { content: ''; position: absolute; left: 12px; top: 0; bottom: 0; width: 2px; background: repeating-linear-gradient(180deg, var(--rose) 0, var(--rose) 8px, transparent 8px, transparent 16px); }
+  .timeline-item { position: relative; margin-bottom: 20px; padding: 22px 26px; background: var(--surface); border: 2px solid var(--border); border-radius: 20px; box-shadow: 0 2px 10px rgba(180,120,150,0.06); transition: transform 0.2s; }
+  .timeline-item:hover { transform: translateX(3px); }
+  .timeline-item::before { content: ''; position: absolute; left: -30px; top: 26px; width: 14px; height: 14px; border-radius: 50%; background: var(--rose); border: 3px solid var(--bg); box-shadow: 0 0 0 2px var(--rose); }
+  .timeline-month { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rose-text); margin-bottom: 6px; }
+  .timeline-title { font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 600; margin-bottom: 8px; color: var(--text); }
+  .timeline-desc { font-size: 0.79rem; color: var(--text2); line-height: 1.7; }
+  .timeline-numbers { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+  .tnum { background: var(--bg); border: 1px solid var(--border2); border-radius: 10px; padding: 6px 12px; font-size: 0.72rem; color: var(--text2); }
+  .tnum span { color: var(--mint-text); font-weight: 700; }
+
+  /* CHECKLIST */
+  .check-list { display: flex; flex-direction: column; gap: 10px; }
+  .check-item { display: flex; align-items: flex-start; gap: 14px; padding: 16px 18px; background: var(--surface); border: 2px solid var(--border); border-radius: 16px; cursor: pointer; transition: all 0.2s; box-shadow: 0 1px 6px rgba(180,120,150,0.04); }
+  .check-item:hover { border-color: var(--rose); background: var(--rose-light); }
+  .check-box { width: 20px; height: 20px; border: 2px solid var(--border2); border-radius: 6px; flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; background: var(--surface); }
+  .check-item.done { background: var(--mint-light); border-color: var(--mint); }
+  .check-item.done .check-box { background: var(--mint); border-color: var(--mint); }
+  .check-item.done .check-box::after { content: '✓'; font-size: 0.75rem; color: white; font-weight: 700; }
+  .check-item.done .check-text { text-decoration: line-through; color: var(--muted); }
+  .check-text { font-size: 0.84rem; line-height: 1.5; font-weight: 600; color: var(--text); }
+  .check-sub { font-size: 0.72rem; color: var(--muted); margin-top: 3px; font-weight: 400; }
+
+  /* INPUT */
+  input[type=text] {
+    background: var(--bg);
+    border: 2px solid var(--border2);
+    border-radius: 12px;
+    color: var(--text);
+    padding: 10px 16px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  input[type=text]:focus { border-color: var(--rose); }
+
+  .btn {
+    background: var(--rose);
+    border: none;
+    color: white;
+    padding: 10px 22px;
+    border-radius: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn:hover { background: var(--rose-text); transform: translateY(-1px); }
+
+  .btn-ghost {
+    background: var(--surface);
+    border: 2px solid var(--border2);
+    color: var(--muted);
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--rose); color: var(--rose-text); }
+
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--rose); border-radius: 999px; }
+
+  @media (max-width: 600px) {
+    header, nav, main { padding-left: 20px; padding-right: 20px; }
+    .card-value { font-size: 1.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+<div class="blob blob3"></div>
+
+<header>
+  <div class="header-left">
+    <h1>Meu Plano <em>Financeiro</em> 🌸</h1>
+    <p>Sobreviver 2026 com carinho · Virar a chave em dez/26 ✨</p>
+  </div>
+  <div class="badge">🎯 Meta: Dezembro/2026</div>
+</header>
+
+<nav>
+  <button class="active" onclick="showTab('visao-geral', this)">🏠 Visão Geral</button>
+  <button onclick="showTab('dividas', this)">💳 Parcelas</button>
+  <button onclick="showTab('orcamento', this)">📊 Orçamento</button>
+  <button onclick="showTab('plano', this)">🗺️ Plano de Ação</button>
+  <button onclick="showTab('checklist', this)">✅ Checklist</button>
+</nav>
+
+<main>
+
+  <!-- VISÃO GERAL -->
+  <div class="tab-content active" id="visao-geral">
+
+    <div class="alert danger">
+      🌺 <strong>Situação atual:</strong> As parcelas fixas mensais somam R$13.440 — mais de 61% da renda. O cartão está cobrindo o que falta no fim do mês. O plano é <strong>segurar firme os próximos 6 meses</strong> e virar o jogo completamente em dezembro/26 quando o cartão encerrar. Você consegue! 💪
+    </div>
+
+    <div class="highlight-box">
+      <div class="label">🎉 A grande virada — dezembro de 2026</div>
+      <div class="value">+R$11.878/mês liberados</div>
+      <div class="sub">Quando o cartão encerrar, você passa de aperto constante para sobra real de verdade.<br>
+      De dez/26 em diante: renda R$22.000 · parcelas caem para ~R$1.562 · sobra estimada <strong>R$6.500–8.000/mês</strong> 🌟</div>
+    </div>
+
+    <div class="section-title">🌷 Panorama atual</div>
+    <div class="grid grid-4" style="margin-bottom:16px;">
+      <div class="card c-sky">
+        <span class="card-emoji">💰</span>
+        <div class="card-label">Renda mensal</div>
+        <div class="card-value v-lavender">R$22.000</div>
+        <div class="card-sub">Recebido dia 10</div>
+      </div>
+      <div class="card c-rose">
+        <span class="card-emoji">💳</span>
+        <div class="card-label">Total em parcelas/mês</div>
+        <div class="card-value v-rose">R$13.440</div>
+        <div class="card-sub">Cartão + dívidas menores</div>
+      </div>
+      <div class="card c-peach">
+        <span class="card-emoji">🏠</span>
+        <div class="card-label">Despesas fixas/mês</div>
+        <div class="card-value v-peach">R$7.062</div>
+        <div class="card-sub">Aluguel, saúde, CNPJ, limpeza</div>
+      </div>
+      <div class="card c-butter">
+        <span class="card-emoji">🌙</span>
+        <div class="card-label">Margem real estimada</div>
+        <div class="card-value" style="color:var(--butter-text)">R$1.498</div>
+        <div class="card-sub">Para tudo mais + reserva</div>
+      </div>
+    </div>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <div class="card-label">Como o dinheiro é distribuído 🌿</div>
+        <div style="margin-top:12px;">
+          <div class="budget-row">
+            <span class="budget-cat">💰 Renda</span>
+            <span class="budget-amount" style="color:var(--mint-text)">+R$22.000</span>
+          </div>
+          <div class="budget-row">
+            <span class="budget-cat">💳 Cartão (parcela fixa)</span>
+            <span class="budget-amount" style="color:var(--rose-text)">−R$11.878</span>
+          </div>
+          <div class="budget-row">
+            <span class="budget-cat">⚖️ Cidadania</span>
+            <span class="budget-amount" style="color:var(--rose-text)">−R$963</span>
+          </div>
+          <div class="budget-row">
+            <span class="budget-cat">🏛️ IR Parcelado</span>
+            <span class="budget-amount" style="color:var(--rose-text)">−R$445,50</span>
+          </div>
+          <div class="budget-row">
+            <span class="budget-cat">✈️ Passagem JP</span>
+            <span class="budget-amount" style="color:var(--rose-text)">−R$153,21</span>
+          </div>
+          <div class="budget-row">
+            <span class="budget-cat">🏠 Aluguel</span>
+            <span class="budget-amount" style="color:var(--peach-text)">−R$4.090</span>
+          </div>
+          <div class="budget-row">
+            <span class="budget-cat">🌸 Saúde</span>
+            <span class="budget-amount" style="color:var(--peach-text)">−R$1.450</span>
+          </div>
+          <div class="budget-row">
+            <span class="budget-cat">📋 CNPJ</span>
+            <span class="budget-amount" style="color:var(--peach-text)">−R$1.122</span>
+          </div>
+          <div class="budget-row">
+            <span class="budget-cat">🧹 Limpeza</span>
+            <span class="budget-amount" style="color:var(--muted)">−R$400</span>
+          </div>
+          <div class="budget-row">
+            <span class="budget-cat">📱 Assinaturas</span>
+            <span class="budget-amount" style="color:var(--muted)">−R$200</span>
+          </div>
+          <div class="budget-row" style="border-top:2px dashed var(--border2);padding-top:14px;border-bottom:none;">
+            <span class="budget-cat" style="font-weight:700;">Sobra antes de compras</span>
+            <span class="budget-amount" style="color:var(--peach-text);font-size:1rem;"><strong>R$1.298</strong></span>
+          </div>
+          <div class="budget-row" style="padding-top:4px;border-bottom:none;">
+            <span class="budget-cat" style="color:var(--muted);font-size:0.75rem;">Casa + produtos + budget (incl. Magic 🃏)</span>
+            <span class="budget-amount" style="color:var(--rose-text);font-size:0.8rem;">−R$2.900–3.900</span>
+          </div>
+          <div class="budget-row" style="padding-top:4px;border-bottom:none;">
+            <span class="budget-cat" style="font-weight:700;">Déficit (vai pro cartão) 😓</span>
+            <span class="budget-amount" style="color:var(--rose-text);font-size:1rem;"><strong>−R$1.600–2.600</strong></span>
+          </div>
+          <div class="budget-row" style="padding-top:4px;border-bottom:none;">
+            <span class="budget-cat" style="color:var(--mint-text);font-size:0.75rem;">🃏 Out/26: Magic encerra → +R$400/mês no budget!</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Situação atual vs. o que muda 🌈</div>
+        <div style="margin-top:12px;">
+          <div class="alert danger" style="margin-bottom:14px;">
+            ⚠️ Usar o cartão para fechar o mês é inevitável agora — mas como é parcela fixa até nov/26, o impacto vai diminuindo naturalmente conforme o tempo passa.
+          </div>
+          <div style="font-size:0.82rem;line-height:1.9;color:var(--text2);">
+            <strong style="color:var(--rose-text)">🎯 Missão dos próximos 6 meses:</strong><br>
+            ✦ Não criar novas dívidas parceladas<br>
+            ✦ Cortar gastos variáveis com carinho mas firmeza<br>
+            ✦ Guardar qualquer sobra positiva, mesmo pequenininha<br>
+            ✦ Chegar em dez/26 sem novas parcelas<br><br>
+            <strong style="color:var(--mint-text)">🌟 O que muda em dezembro/26:</strong><br>
+            🌸 Cartão encerra: +R$11.878/mês de volta<br>
+            🌸 Cidadania encerra: +R$963/mês<br>
+            🌸 IR encerra: +R$445/mês<br>
+            🌟 Sobra real vira R$6.500–8.000/mês
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title">🗓️ Quando cada parcela acaba</div>
+    <div class="grid grid-4">
+      <div class="card c-rose">
+        <span class="card-emoji">💳</span>
+        <div class="card-label">Cartão</div>
+        <div class="card-value v-rose" style="font-size:1.6rem;">Nov/26</div>
+        <div class="card-sub">R$11.878/mês · parcela fixa</div>
+        <div class="progress-bar" style="margin-top:12px;"><div class="progress-fill" style="width:45%;background:var(--rose)"></div></div>
+        <div class="progress-label"><span>~6 meses</span><span>45%</span></div>
+      </div>
+      <div class="card c-peach">
+        <span class="card-emoji">⚖️</span>
+        <div class="card-label">Cidadania</div>
+        <div class="card-value v-peach" style="font-size:1.6rem;">Nov/26</div>
+        <div class="card-sub">R$963/mês · 14ª de 20</div>
+        <div class="progress-bar" style="margin-top:12px;"><div class="progress-fill" style="width:70%;background:var(--peach)"></div></div>
+        <div class="progress-label"><span>6 parcelas</span><span>70%</span></div>
+      </div>
+      <div class="card c-mint">
+        <span class="card-emoji">🏛️</span>
+        <div class="card-label">IR Parcelado</div>
+        <div class="card-value v-mint" style="font-size:1.6rem;">Dez/26</div>
+        <div class="card-sub">R$445,50/mês · 1ª de 8</div>
+        <div class="progress-bar" style="margin-top:12px;"><div class="progress-fill" style="width:12%;background:var(--mint)"></div></div>
+        <div class="progress-label"><span>7 parcelas</span><span>12%</span></div>
+      </div>
+      <div class="card c-lavender">
+        <span class="card-emoji">✈️</span>
+        <div class="card-label">Passagem JP</div>
+        <div class="card-value v-lavender" style="font-size:1.6rem;">Jan/27</div>
+        <div class="card-sub">R$153,21/mês · 3ª de 10</div>
+        <div class="progress-bar" style="margin-top:12px;"><div class="progress-fill" style="width:30%;background:var(--lavender)"></div></div>
+        <div class="progress-label"><span>7 parcelas</span><span>30%</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PARCELAS -->
+  <div class="tab-content" id="dividas">
+
+    <div class="alert danger">
+      💳 O cartão não é um saldo que você escolhe pagar — é uma parcela fixa automática de R$11.878/mês até novembro/26. A estratégia é <strong>não adicionar novas parcelas</strong> e chegar em novembro com o parcelamento encerrando sozinho. 🌸
+    </div>
+
+    <div class="section-title">💌 Parcelas ativas</div>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+
+      <div class="debt-item" style="border-left:4px solid var(--rose); border-color:var(--rose);">
+        <div>
+          <div class="debt-name">💳 Cartão de Crédito — Parcela Fixa</div>
+          <div class="debt-detail">Débito automático · Encerra novembro/2026</div>
+          <div class="debt-detail" style="color:var(--rose-text);margin-top:4px;">⚠️ Não há como reduzir — apenas não aumentar com novas compras</div>
+        </div>
+        <div class="debt-value">
+          <div class="debt-total" style="color:var(--rose-text)">R$11.878</div>
+          <div class="debt-parcel">por mês · ~6 meses restantes</div>
+        </div>
+      </div>
+
+      <div class="debt-item" style="border-left:4px solid var(--peach); border-color:var(--peach);">
+        <div>
+          <div class="debt-name">⚖️ Boleto Cidadania (Advogada)</div>
+          <div class="debt-detail">14ª de 20 parcelas · Encerra novembro/2026</div>
+          <div class="debt-detail" style="color:var(--peach-text);margin-top:4px;">Manter em dia — atraso pode comprometer o processo</div>
+        </div>
+        <div class="debt-value">
+          <div class="debt-total" style="color:var(--peach-text)">R$963</div>
+          <div class="debt-parcel">por mês · 6 restantes = R$5.778</div>
+        </div>
+      </div>
+
+      <div class="debt-item" style="border-left:4px solid var(--mint); border-color:var(--mint);">
+        <div>
+          <div class="debt-name">🏛️ IR Parcelado (automático)</div>
+          <div class="debt-detail">1ª de 8 parcelas · Encerra dezembro/2026 · Sai sozinho da conta</div>
+          <div class="debt-detail" style="color:var(--mint-text);margin-top:4px;">Só monitorar se saiu corretamente — nada mais a fazer 🌿</div>
+        </div>
+        <div class="debt-value">
+          <div class="debt-total" style="color:var(--mint-text)">R$445,50</div>
+          <div class="debt-parcel">por mês · 7 restantes = R$3.118,50</div>
+        </div>
+      </div>
+
+      <div class="debt-item" style="border-left:4px solid var(--lavender); border-color:var(--lavender);">
+        <div>
+          <div class="debt-name">✈️ Passagem JP (cartão)</div>
+          <div class="debt-detail">3ª de 10 parcelas · Encerra janeiro/2027 · Menor valor</div>
+          <div class="debt-detail" style="color:var(--lavender-text);margin-top:4px;">Manter normalmente — não priorizar antecipação</div>
+        </div>
+        <div class="debt-value">
+          <div class="debt-total" style="color:var(--lavender-text)">R$153,21</div>
+          <div class="debt-parcel">por mês · 7 restantes = R$1.072,47</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-title">🌷 Resumo do comprometimento</div>
+    <div class="grid grid-3">
+      <div class="card c-rose">
+        <span class="card-emoji">📊</span>
+        <div class="card-label">Total em parcelas/mês</div>
+        <div class="card-value v-rose">R$13.440</div>
+        <div class="card-sub">61% da renda comprometida</div>
+      </div>
+      <div class="card c-peach">
+        <span class="card-emoji">🎊</span>
+        <div class="card-label">Que encerra em nov/26</div>
+        <div class="card-value v-peach">R$12.841</div>
+        <div class="card-sub">Cartão + Cidadania juntos!</div>
+      </div>
+      <div class="card c-mint">
+        <span class="card-emoji">🌟</span>
+        <div class="card-label">Parcelas em jan/27</div>
+        <div class="card-value v-mint">R$153/mês</div>
+        <div class="card-sub">Só a passagem JP resta</div>
+      </div>
+    </div>
+
+    <div class="alert info" style="margin-top:24px;">
+      💡 <strong>Ponto importantíssimo:</strong> novas compras parceladas no cartão agora aparecem na fatura <em>depois</em> que o parcelamento atual encerrar — atrasando a liberdade. A regra carinhosa mas firme até novembro: <strong>zero novos parcelamentos no cartão</strong>. 🌸
+    </div>
+
+  </div>
+
+  <!-- ORÇAMENTO -->
+  <div class="tab-content" id="orcamento">
+
+    <div class="alert warn">
+      📅 Você recebe dia 10 e o cartão vence dia 15. Com margem apertada, a ordem dos pagamentos é super importante — cada real tem seu destino carinhoso! 🌿
+    </div>
+
+    <div class="section-title">🗒️ Ordem de pagamento — todo dia 10</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Item</th>
+            <th>Tipo</th>
+            <th>Valor</th>
+            <th>Quando</th>
+            <th>Observação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="color:var(--muted)">1</td>
+            <td><strong>🏠 Aluguel (PIX)</strong></td>
+            <td><span class="tag fixed">Fixo</span></td>
+            <td>R$4.090,00</td>
+            <td>Dia 10 — imediato</td>
+            <td style="color:var(--muted);font-size:0.75rem;">Primeiro de todos! 🌸</td>
+          </tr>
+          <tr>
+            <td style="color:var(--muted)">2</td>
+            <td><strong>🌸 Plano de Saúde</strong></td>
+            <td><span class="tag fixed">Fixo</span></td>
+            <td>R$1.450,00</td>
+            <td>Dia 10</td>
+            <td style="color:var(--muted);font-size:0.75rem;">Não atrasar</td>
+          </tr>
+          <tr>
+            <td style="color:var(--muted)">3</td>
+            <td><strong>📋 CNPJ (boleto)</strong></td>
+            <td><span class="tag fixed">Fixo</span></td>
+            <td>R$1.122,00</td>
+            <td>Dia 10</td>
+            <td style="color:var(--muted);font-size:0.75rem;">Obrigatório</td>
+          </tr>
+          <tr>
+            <td style="color:var(--muted)">4</td>
+            <td><strong>⚖️ Cidadania / Advogada</strong></td>
+            <td><span class="tag debt">Parcela</span></td>
+            <td>R$963,00</td>
+            <td>Dia 10</td>
+            <td style="color:var(--muted);font-size:0.75rem;">Processo em andamento</td>
+          </tr>
+          <tr>
+            <td style="color:var(--muted)">5</td>
+            <td><strong>🏛️ IR Parcelado</strong></td>
+            <td><span class="tag debt">Parcela</span></td>
+            <td>R$445,50</td>
+            <td>Automático</td>
+            <td style="color:var(--muted);font-size:0.75rem;">Só conferir se saiu</td>
+          </tr>
+          <tr>
+            <td style="color:var(--muted)">6</td>
+            <td><strong>💳 Cartão (vence dia 15)</strong></td>
+            <td><span class="tag critical">Parcela fixa</span></td>
+            <td>R$11.878,00</td>
+            <td>Antes do dia 15</td>
+            <td style="color:var(--rose-text);font-size:0.75rem;">Débito automático — confirmar saldo</td>
+          </tr>
+          <tr>
+            <td style="color:var(--muted)">7</td>
+            <td>🧹 Limpeza casa (PIX)</td>
+            <td><span class="tag fixed">Fixo</span></td>
+            <td>R$400,00</td>
+            <td>Combinar</td>
+            <td style="color:var(--muted);font-size:0.75rem;">—</td>
+          </tr>
+          <tr>
+            <td style="color:var(--muted)">8</td>
+            <td>📱 Assinaturas (cartão)</td>
+            <td><span class="tag fixed">Fixo</span></td>
+            <td>R$200,00</td>
+            <td>Varia</td>
+            <td style="color:var(--peach-text);font-size:0.75rem;">Revisar — cancelar o não-essencial</td>
+          </tr>
+          <tr style="background:var(--mint-light);">
+            <td style="color:var(--muted)">9</td>
+            <td><strong>🛒 Compras casa + produtos</strong></td>
+            <td><span class="tag flex">Variável</span></td>
+            <td><strong style="color:var(--mint-text)">Máx. R$1.200</strong></td>
+            <td>Mês todo</td>
+            <td style="color:var(--mint-text);font-size:0.75rem;">Cortar com carinho 🌿</td>
+          </tr>
+          <tr style="background:var(--mint-light);">
+            <td style="color:var(--muted)">10</td>
+            <td><strong>🎀 Budget pessoal</strong><br><span style="font-size:0.7rem;color:var(--muted);">incl. 🃏 Magic R$400 (até set/26)</span></td>
+            <td><span class="tag flex">Variável</span></td>
+            <td><strong style="color:var(--mint-text)">Máx. R$600</strong><br><span style="font-size:0.7rem;color:var(--mint-text);">→ R$200 real (fora Magic)</span></td>
+            <td>Mês todo</td>
+            <td style="color:var(--mint-text);font-size:0.75rem;">Out/26: Magic acaba, budget abre R$400! 🃏</td>
+          </tr>
+          <tr style="background:var(--butter-light);">
+            <td></td>
+            <td><strong>🌟 Reserva de emergência</strong></td>
+            <td><span class="tag saving">Reserva</span></td>
+            <td><strong style="color:var(--butter-text)">Qualquer sobra</strong></td>
+            <td>Dia 10 — primeiro!</td>
+            <td style="color:var(--butter-text);font-size:0.75rem;">Mesmo R$50 conta! 🌸</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-title">🌿 O que cortar temporariamente (até dez/26)</div>
+    <div class="grid grid-2">
+      <div class="card c-mint">
+        <div class="card-label">✂️ Cortes possíveis com carinho</div>
+        <div style="font-size:0.82rem;line-height:1.9;margin-top:10px;color:var(--text2);">
+          🌸 <strong>Budget pessoal:</strong> de R$1.200–2.000 → R$600/mês<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:0.75rem;color:var(--muted);">🃏 Desse valor, R$400 são parcelas de Magic (até set/26). Budget livre real = R$200</span><br>
+          🌸 <strong>Compras da casa:</strong> de R$1.200 → R$800<br>
+          🌸 <strong>Produtos mensais:</strong> de R$300–500 → R$200<br>
+          🌸 <strong>Assinaturas:</strong> revisar os R$200 — o que não usa, cancela<br><br>
+          <span style="color:var(--mint-text);font-weight:700;">Economia potencial: R$1.100–2.100/mês ✨</span><br>
+          <span style="color:var(--muted);font-size:0.75rem;">Esse valor para de ir pro cartão e vai pro futuro 🌟</span><br>
+          <span style="color:var(--lavender-text);font-size:0.75rem;">🃏 Bônus: a partir de out/26, Magic encerra e libera +R$400 dentro do budget!</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">📊 Meta mensal — mai a nov/26</div>
+        <div style="margin-top:12px;">
+          <div class="budget-row">
+            <span class="budget-cat">💰 Renda</span>
+            <span class="budget-amount" style="color:var(--mint-text)">+R$22.000</span>
+          </div>
+          <div class="budget-row">
+            <span class="budget-cat">💳 Cartão (parcela)</span>
+            <span class="budget-amount" style="color:var(--rose-text)">−R$11.878</span>
+          </div>
+          <div class="budget-row">
+            <span class="budget-cat">📦 Demais parcelas</span>
+            <span class="budget-amount" style="color:var(--rose-text)">−R$1.562</span>
+          </div>
+          <div class="budget-row">
+            <span class="budget-cat">🏠 Fixos (aluguel+saúde+CNPJ+limpeza)</span>
+            <span class="budget-amount" style="color:var(--peach-text)">−R$7.062</span>
+          </div>
+          <div class="budget-row">
+            <span class="budget-cat">📱 Assinaturas</span>
+            <span class="budget-amount" style="color:var(--muted)">−R$150</span>
+          </div>
+          <div class="budget-row">
+            <span class="budget-cat">🛒 Compras + produtos (meta)</span>
+            <span class="budget-amount" style="color:var(--muted)">−R$1.000</span>
+          </div>
+          <div class="budget-row">
+            <span class="budget-cat">🎀 Budget pessoal (meta)</span>
+            <span class="budget-amount" style="color:var(--muted)">−R$600</span>
+          </div>
+          <div class="budget-row" style="border-top:2px dashed var(--border2);padding-top:14px;border-bottom:none;">
+            <span class="budget-cat" style="font-weight:700;">Sobra estimada</span>
+            <span class="budget-amount" style="color:var(--peach-text);font-size:1rem;"><strong>≈ −R$252</strong></span>
+          </div>
+          <div style="font-size:0.72rem;color:var(--muted);margin-top:8px;line-height:1.5;">
+            Mesmo com cortes o mês fica quase no zero. O objetivo real é <strong>parar de aumentar o saldo do cartão</strong> — qualquer sobra positiva é uma vitória enorme! 🌸
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PLANO DE AÇÃO -->
+  <div class="tab-content" id="plano">
+
+    <div class="alert lavender">
+      🗺️ O plano tem duas fases: <strong>Fase 1 (mai–nov/26)</strong> — segurar firme com carinho. <strong>Fase 2 (dez/26 em diante)</strong> — construir o futuro dos sonhos. ✨
+    </div>
+
+    <div class="timeline">
+
+      <div class="timeline-item" style="border-color:var(--rose);">
+        <div class="timeline-month" style="color:var(--rose-text)">🌺 Maio — Junho 2026 — Diagnóstico</div>
+        <div class="timeline-title">Parar de sangrar: entender o cartão</div>
+        <div class="timeline-desc">
+          Abrir o extrato completo do cartão e identificar quais compras compõem os R$11.878. Verificar se há compras parceladas novas além do parcelamento original. Cancelar débitos automáticos desnecessários no cartão. Não fazer nenhum novo parcelamento. Ativar alertas de gasto no app do banco. 🔍
+        </div>
+        <div class="timeline-numbers">
+          <div class="tnum">Ação principal: <span>Auditar o cartão</span></div>
+          <div class="tnum">Regra de ouro: <span>Zero novos parcelamentos</span></div>
+          <div class="tnum">Reserva: <span>Qualquer sobra positiva</span></div>
+        </div>
+      </div>
+
+      <div class="timeline-item" style="border-color:var(--peach);">
+        <div class="timeline-month" style="color:var(--peach-text)">🍑 Julho — Agosto 2026 — Ajuste</div>
+        <div class="timeline-title">Cortes em prática + checar progresso</div>
+        <div class="timeline-desc">
+          Com os cortes funcionando, verificar se o uso do limite do cartão diminuiu. Revisar assinaturas e cancelar o que não está usando. Tentar manter compras da casa em R$800–1.000. Budget pessoal disciplinado em R$600. Cada centavo economizado é uma vitória! 💪
+        </div>
+        <div class="timeline-numbers">
+          <div class="tnum">Meta uso extra cartão: <span>&lt; R$500/mês</span></div>
+          <div class="tnum">Reserva acumulada: <span>R$200–600</span></div>
+        </div>
+      </div>
+
+      <div class="timeline-item" style="border-color:var(--butter);">
+        <div class="timeline-month" style="color:var(--butter-text)">🌻 Setembro — Outubro 2026 — Reta final</div>
+        <div class="timeline-title">Segurar o ritmo — falta pouquinho! 🎯</div>
+        <div class="timeline-desc">
+          Manter os cortes. Já dá para visualizar o fim do cartão no horizonte! Evitar qualquer compra grande por impulso. Cidadania tem 2–3 parcelas restantes. IR tem 3–4 parcelas restantes. Você está quase lá! ✨
+        </div>
+        <div class="timeline-numbers">
+          <div class="tnum">Parcelas restantes cartão: <span>2</span></div>
+          <div class="tnum">Liberação no horizonte: <span>+R$12.841/mês</span></div>
+        </div>
+      </div>
+
+      <div class="timeline-item" style="border-color:var(--rose);">
+        <div class="timeline-month" style="color:var(--rose-text)">🏁 Novembro 2026 — Marco importante!</div>
+        <div class="timeline-title">Última parcela do cartão + Cidadania encerra 🎊</div>
+        <div class="timeline-desc">
+          Último mês pesado. Cartão e Cidadania encerram juntos — que alívio! Não fazer novas compras parceladas agora. Dezembro já começa completamente diferente. IR tem 2 parcelas restantes. Passagem JP tem 2 parcelas restantes. 🌈
+        </div>
+        <div class="timeline-numbers">
+          <div class="tnum">Liberado em dez: <span>+R$12.841</span></div>
+          <div class="tnum">Ainda ativo: <span>IR + Passagem JP</span></div>
+        </div>
+      </div>
+
+      <div class="timeline-item" style="border-color:var(--mint);background:var(--mint-light);">
+        <div class="timeline-month" style="color:var(--mint-text)">🎉 Dezembro 2026 — A GRANDE VIRADA!</div>
+        <div class="timeline-title">O primeiro mês com sobra real de verdade 🌟</div>
+        <div class="timeline-desc">
+          Cartão zerado. Cidadania encerrada. IR na penúltima parcela. Passagem JP na penúltima. Pela primeira vez você tem ~R$8.000+ sobrando depois de pagar tudo! Usar dezembro para montar o plano de investimento de 2027. Você chegou lá! 💚
+        </div>
+        <div class="timeline-numbers">
+          <div class="tnum">Sobra estimada: <span>R$7.000–8.500/mês</span></div>
+          <div class="tnum">Parcelas ainda ativas: <span>R$598/mês</span></div>
+          <div class="tnum">Reserva: <span>Construir com força! 🌸</span></div>
+        </div>
+      </div>
+
+      <div class="timeline-item" style="border-color:var(--lavender);background:var(--lavender-light);">
+        <div class="timeline-month" style="color:var(--lavender-text)">🌟 Janeiro 2027 em diante — Fase 2: Construção!</div>
+        <div class="timeline-title">Guardar dinheiro de verdade, todo mês 💜</div>
+        <div class="timeline-desc">
+          Passagem JP e IR encerram. Você fica com R$22.000 de renda e apenas R$7.062 de despesas fixas. Sobra líquida de R$8.000–10.000/mês. Meta: R$3.000–4.000/mês em investimentos. Reserva de 6 meses = R$45.000 em 12–15 meses. O futuro chegou! ✨
+        </div>
+        <div class="timeline-numbers">
+          <div class="tnum">Investimento mensal: <span>R$3.000–4.000</span></div>
+          <div class="tnum">Meta reserva: <span>R$45.000</span></div>
+          <div class="tnum">Prazo: <span>12–15 meses 🌈</span></div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- CHECKLIST -->
+  <div class="tab-content" id="checklist">
+
+    <div class="alert info">
+      ✅ Use este checklist todo mês logo após receber no dia 10. O objetivo agora não é guardar muito — é <strong>não piorar a situação</strong> e chegar em dezembro intacta e linda! 🌸
+    </div>
+
+    <div class="section-title">🌸 Checklist mensal — dia 10</div>
+    <div class="check-list">
+
+      <label class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div>
+          <div class="check-text">🏠 Pagar o aluguel imediatamente (R$4.090 PIX)</div>
+          <div class="check-sub">Primeiro pagamento do dia — sem exceção, sempre!</div>
+        </div>
+      </label>
+
+      <label class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div>
+          <div class="check-text">🌸 Pagar plano de saúde (R$1.450)</div>
+          <div class="check-sub">Não atrasar — reativação é cara e burocrática</div>
+        </div>
+      </label>
+
+      <label class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div>
+          <div class="check-text">📋 Pagar CNPJ (R$1.122)</div>
+          <div class="check-sub">Obrigatório para manter o CNPJ ativo</div>
+        </div>
+      </label>
+
+      <label class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div>
+          <div class="check-text">⚖️ Pagar Cidadania / Advogada (R$963)</div>
+          <div class="check-sub">Processo em andamento — atraso pode ter consequências graves</div>
+        </div>
+      </label>
+
+      <label class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div>
+          <div class="check-text">🏛️ Confirmar desconto automático do IR (R$445,50)</div>
+          <div class="check-sub">Verificar no extrato se saiu certinho</div>
+        </div>
+      </label>
+
+      <label class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div>
+          <div class="check-text">💳 Confirmar débito automático do cartão (R$11.878) antes do dia 15</div>
+          <div class="check-sub">Garantir saldo disponível para o débito não ser rejeitado</div>
+        </div>
+      </label>
+
+      <label class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div>
+          <div class="check-text">🔍 Verificar se usei o limite do cartão para algo este mês</div>
+          <div class="check-sub">Se sim: anotar o valor. Meta é diminuir esse número mês a mês até chegar a zero!</div>
+        </div>
+      </label>
+
+      <label class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div>
+          <div class="check-text">🛒 Definir budget de compras da casa (meta: máx. R$1.000)</div>
+          <div class="check-sub">Listar o que realmente precisa antes de ir ao mercado ou apps</div>
+        </div>
+      </label>
+
+      <label class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div>
+          <div class="check-text">🎀 Definir budget pessoal do mês (meta: máx. R$600)</div>
+          <div class="check-sub">Temporário — em 2027 esse valor volta a crescer com liberdade!</div>
+        </div>
+      </label>
+
+      <label class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div>
+          <div class="check-text">🌟 Guardar qualquer sobra positiva (mesmo que R$50!)</div>
+          <div class="check-sub">Conta separada — não misturar com a corrente. Todo pouquinho conta! 🌸</div>
+        </div>
+      </label>
+
+      <label class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div>
+          <div class="check-text">🎯 Zero novos parcelamentos no cartão este mês?</div>
+          <div class="check-sub">Regra inegociável até novembro/26. Novas parcelas = atraso na liberdade.</div>
+        </div>
+      </label>
+
+      <label class="check-item" onclick="toggle(this)">
+        <div class="check-box"></div>
+        <div>
+          <div class="check-text">📅 Quantos meses faltam para o cartão encerrar?</div>
+          <div class="check-sub">Ver o número diminuir é o combustível para continuar. Você está chegando lá! ✨</div>
+        </div>
+      </label>
+
+    </div>
+
+    <div style="margin-top:20px;text-align:right;">
+      <button class="btn-ghost" onclick="resetChecklist()">🔄 Resetar para novo mês</button>
+    </div>
+
+    <div class="section-title">⏳ Contagem regressiva — meses até a virada</div>
+    <div class="grid grid-4">
+      <div class="card c-rose">
+        <span class="card-emoji">💳</span>
+        <div class="card-label">Cartão encerra em</div>
+        <div class="card-value v-rose" id="mesesCartao" style="font-size:2.5rem;">—</div>
+        <div class="card-sub">meses · Novembro/2026</div>
+      </div>
+      <div class="card c-peach">
+        <span class="card-emoji">⚖️</span>
+        <div class="card-label">Cidadania encerra em</div>
+        <div class="card-value v-peach" id="mesesCidadania" style="font-size:2.5rem;">—</div>
+        <div class="card-sub">meses · Novembro/2026</div>
+      </div>
+      <div class="card c-mint">
+        <span class="card-emoji">🏛️</span>
+        <div class="card-label">IR encerra em</div>
+        <div class="card-value v-mint" id="mesesIR" style="font-size:2.5rem;">—</div>
+        <div class="card-sub">meses · Dezembro/2026</div>
+      </div>
+      <div class="card c-lavender">
+        <span class="card-emoji">🎉</span>
+        <div class="card-label">Liberação ao encerrar</div>
+        <div class="card-value v-lavender" style="font-size:1.5rem;">R$12.841</div>
+        <div class="card-sub">por mês a partir de dez/26!</div>
+      </div>
+    </div>
+
+    <div class="section-title">📝 Acompanhar uso extra do cartão este mês</div>
+    <div class="card c-sky" style="max-width:520px;">
+      <div class="card-label">Quanto usei do limite além das parcelas fixas?</div>
+      <div style="margin-top:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+        <input id="usoCartao" type="text" placeholder="Ex: R$1.800" style="flex:1;min-width:150px;">
+        <button class="btn" onclick="registrarUso()">Registrar ✨</button>
+      </div>
+      <div id="usoMsg" style="font-size:0.78rem;margin-top:10px;line-height:1.6;"></div>
+    </div>
+
+  </div>
+
+</main>
+
+<footer style="border-top:2px dashed var(--border2);padding:28px 40px;text-align:center;color:var(--muted);font-size:0.78rem;margin-top:40px;background:rgba(255,255,255,0.5);">
+  🌸 6 meses de resistência carinhosa · Uma vida de liberdade · Você vai chegar lá! ✨
+</footer>
+
+<script>
+  function showTab(id, btn) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('nav button').forEach(el => el.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  function toggle(el) { el.classList.toggle('done'); }
+  function resetChecklist() { document.querySelectorAll('.check-item').forEach(el => el.classList.remove('done')); }
+
+  function calcMeses(targetYear, targetMonth) {
+    const now = new Date();
+    const diff = (targetYear - now.getFullYear()) * 12 + (targetMonth - 1 - now.getMonth());
+    return Math.max(0, diff);
+  }
+  document.getElementById('mesesCartao').textContent = calcMeses(2026, 11);
+  document.getElementById('mesesCidadania').textContent = calcMeses(2026, 11);
+  document.getElementById('mesesIR').textContent = calcMeses(2026, 12);
+
+  function registrarUso() {
+    const val = document.getElementById('usoCartao').value;
+    const msg = document.getElementById('usoMsg');
+    const num = parseFloat(val.replace(/[^0-9,.]/g,'').replace(',','.'));
+    if (isNaN(num)) { msg.style.color = 'var(--rose-text)'; msg.textContent = 'Digite um valor válido, tá bem? 🌸'; return; }
+    if (num === 0) {
+      msg.style.color = 'var(--mint-text)';
+      msg.textContent = '🎉 Zero de uso extra esse mês! Isso é INCRÍVEL! Você arrasou!';
+    } else if (num < 500) {
+      msg.style.color = 'var(--mint-text)';
+      msg.textContent = `✅ R$${num.toFixed(2)} de uso extra — bem abaixo da média! Continue assim, você está melhorando! 🌿`;
+    } else if (num < 1500) {
+      msg.style.color = 'var(--peach-text)';
+      msg.textContent = `🌸 R$${num.toFixed(2)} de uso extra — ainda impacta, mas é manejável. Tente cortar R$${(num/2).toFixed(0)} no próximo mês, vai conseguir!`;
+    } else {
+      msg.style.color = 'var(--rose-text)';
+      msg.textContent = `💗 R$${num.toFixed(2)} de uso extra — esse valor vai aparecer na fatura futura. Identifique onde está saindo e corte com carinho, mas corte. Você consegue! 🌸`;
+    }
+  }
+
+  setTimeout(() => {
+    document.querySelectorAll('.progress-fill').forEach(el => {
+      const w = el.style.width;
+      el.style.width = '0%';
+      setTimeout(() => { el.style.width = w; }, 200);
+    });
+  }, 400);
+</script>
+</body>
+</html>
